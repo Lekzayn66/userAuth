@@ -5,7 +5,7 @@ exports.getAdminDashboard = async (req, res) => {
 };
 
 exports.getAddFood=(req, res) => {
-    res.render('admin/add-food');
+    res.render('admin/addfood');
 }
 
 exports.postAddFood= async (req, res) => {
