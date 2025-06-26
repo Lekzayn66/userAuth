@@ -5,7 +5,7 @@ exports.getAdminDashboard = async (req, res) => {
 };
 
 exports.getAddFood=(req, res) => {
-    res.render('admin/addfood');
+    res.render('admin/addFood');
 }
 
 exports.postAddFood= async (req, res) => {
@@ -21,7 +21,7 @@ exports.postAddFood= async (req, res) => {
     await db.none('INSERT INTO food_items (name, description, image_url, price) VALUES ($1, $2, $3, $4)', 
         [name, description, image_url, price]);
 
-        res.redirect('/admin/food');
+        res.redirect('/admin/addFood');
     } catch (error) {
         console.error('Error adding food item:', error);
         res.status(500).send('server error while adding food item.' );
