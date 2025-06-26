@@ -21,7 +21,7 @@ exports.postAddFood= async (req, res) => {
     await db.none('INSERT INTO food_items (name, description, image_url, price) VALUES ($1, $2, $3, $4)', 
         [name, description, image_url, price]);
 
-        res.redirect('/admin/addFood');
+        res.redirect('/admin/food');
     } catch (error) {
         console.error('Error adding food item:', error);
         res.status(500).send('server error while adding food item.' );
@@ -31,7 +31,7 @@ exports.postAddFood= async (req, res) => {
 exports.getAllFood= async (req, res) => {
     try{
         const foods= await db.any('SELECT * FROM food_items ORDER BY created_at DESC');
-        res.render('admin/foodList', { foods });
+        res.render('/admin/foodList', { foods });
 
     } catch (error) {
         console.error('Error fetching food items:', error);
