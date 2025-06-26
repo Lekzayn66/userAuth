@@ -31,7 +31,7 @@ exports.postAddFood= async (req, res) => {
 exports.getAllFood= async (req, res) => {
     try{
         const foods= await db.any('SELECT * FROM food_items ORDER BY created_at DESC');
-        res.render('admin/foodList', { foods });
+        res.render('/admin/foodList', { foods });
 
     } catch (error) {
         console.error('Error fetching food items:', error);
@@ -60,7 +60,7 @@ exports.postEditedFood=async (req, res) => {
     try {
         await db.none('UPDATE food_items SET name = $1, description = $2, image_url = $3, price = $4 WHERE id = $5', 
             [name, description, image_url, price, id]);
-        res.redirect('/admin/food');
+        res.redirect('/admin/addFood');
 
     } catch (error) {
         console.error('Error updating food item:', error);
@@ -73,7 +73,7 @@ exports.deleteFood = async (req, res) => {
     const { id } = req.params;
     try {
         await db.none('DELETE FROM food_items WHERE id = $1', [id]);
-        res.redirect('/admin/food');
+        res.redirect('/admin/addFood');
     } catch (error) {
         console.error('Error deleting food item:', error);
         res.status(500).send('Internal Server Error');
